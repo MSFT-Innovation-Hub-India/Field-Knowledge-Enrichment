@@ -1,0 +1,80 @@
+{
+  "asset_id": "WMQISXM1V1-02616",
+  "asset_type": "station",
+  "station_name": "Hinjewadi Phase 1 Swap Hub",
+  "location": { "city": "Pune", "area": "Hinjewadi Phase 1", "state": "Maharashtra", "latitude": 18.5912, "longitude": 73.7389 },
+  "site_type": "Fuel station forecourt (partner site)",
+  "install_date": "2022-03-14",
+  "hardware_model": "SwapStation-X1 Gen2",
+  "slot_count": 12,
+  "charger_modules": 12,
+  "charger_rating_kw": 1.5,
+  "power_supply": "3-phase 415V, 25 kVA sanctioned load",
+  "firmware_version": "STN-FW 4.2.7",
+  "connectivity": { "primary": "4G LTE (Airtel SIM)", "backup": "None", "modem_model": "Quectel EC25" },
+  "operational_status": "Active",
+  "avg_daily_swaps": 142,
+  "uptime_last_30_days_pct": 97.8,
+  "last_preventive_maintenance": "2026-10-02",
+  "next_preventive_maintenance": "2027-01-02",
+  "field_engineer": "Rohit Deshmukh",
+  "assigned_batteries": ["INSMOMAH0809A061E913", "INSMOMAH2109A271AD13"],
+  "known_issues": [
+    {
+      "issue_code": "E-101",
+      "issue": "Station offline / communication loss with cloud",
+      "frequency": "Recurring (approx. 2x per month)",
+      "probable_cause": "Weak 4G signal near forecourt canopy; SIM data session drops",
+      "linked_sop": "SOP-STN-001"
+    },
+    {
+      "issue_code": "E-204",
+      "issue": "Charger module overcurrent fault on slot 7",
+      "frequency": "Occasional",
+      "probable_cause": "Degraded charger module MOSFET",
+      "linked_sop": "SOP-STN-002"
+    },
+    {
+      "issue_code": "W-310",
+      "issue": "High cabinet temperature, charging derated",
+      "frequency": "Seasonal (April-June)",
+      "probable_cause": "Ambient above 40°C and clogged intake filter",
+      "linked_sop": "SOP-BAT-001"
+    }
+  ],
+  "incident_history": [
+    {
+      "ticket_id": "INC-2026-04117",
+      "date_reported": "2026-04-22",
+      "issue_code": "W-310",
+      "symptoms": "Charging paused on 5 slots, cabinet temperature 58°C, swap queue building up",
+      "root_cause": "Intake air filter clogged with dust; exhaust fan 2 running at 40% RPM",
+      "resolution": "Cleaned and replaced intake filter, replaced exhaust fan 2, verified cabinet temperature dropped to 41°C within 30 minutes",
+      "resolved_by": "Rohit Deshmukh",
+      "time_to_resolve_hours": 3.5,
+      "linked_sop": "SOP-BAT-001"
+    },
+    {
+      "ticket_id": "INC-2026-06231",
+      "date_reported": "2026-06-18",
+      "issue_code": "E-101",
+      "symptoms": "Station showing offline on dashboard for 2 hours; swaps working locally but not synced",
+      "root_cause": "SIM data session stuck after network tower maintenance",
+      "resolution": "Remote modem reboot failed; on-site power cycle of modem restored connectivity. Offline transactions synced automatically",
+      "resolved_by": "NOC Team + Rohit Deshmukh",
+      "time_to_resolve_hours": 2.8,
+      "linked_sop": "SOP-STN-001"
+    },
+    {
+      "ticket_id": "INC-2026-09044",
+      "date_reported": "2026-09-05",
+      "issue_code": "E-204",
+      "symptoms": "Slot 7 shows red LED, batteries inserted in slot 7 not charging",
+      "root_cause": "Charger module CM-07 output MOSFET failure",
+      "resolution": "Slot 7 disabled remotely, charger module CM-07 replaced with spare (S/N CM15-88231), slot re-enabled after test charge",
+      "resolved_by": "Rohit Deshmukh",
+      "time_to_resolve_hours": 6.0,
+      "linked_sop": "SOP-STN-002"
+    }
+  ]
+}

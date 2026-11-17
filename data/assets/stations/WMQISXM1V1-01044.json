@@ -1,0 +1,63 @@
+{
+  "asset_id": "WMQISXM1V1-01044",
+  "asset_type": "station",
+  "station_name": "Whitefield ITPL Road Swap Point",
+  "location": { "city": "Bengaluru", "area": "Whitefield", "state": "Karnataka", "latitude": 12.9857, "longitude": 77.7310 },
+  "site_type": "Retail mall parking (partner site)",
+  "install_date": "2023-06-02",
+  "hardware_model": "SwapStation-X1 Gen2",
+  "slot_count": 10,
+  "charger_modules": 10,
+  "charger_rating_kw": 1.5,
+  "power_supply": "3-phase 415V, 20 kVA sanctioned load",
+  "firmware_version": "STN-FW 4.2.7",
+  "connectivity": { "primary": "4G LTE (Airtel SIM)", "backup": "4G LTE (Jio SIM, dual-SIM failover)", "modem_model": "Quectel EC25" },
+  "operational_status": "Under Maintenance",
+  "avg_daily_swaps": 121,
+  "uptime_last_30_days_pct": 89.6,
+  "last_preventive_maintenance": "2026-11-10",
+  "next_preventive_maintenance": "2027-02-10",
+  "field_engineer": "Karthik Gowda",
+  "assigned_batteries": ["INSMOMAH8210F2625D13"],
+  "known_issues": [
+    {
+      "issue_code": "E-603",
+      "issue": "Battery not detected in slot / BMS communication timeout",
+      "frequency": "Recurring on slot 3",
+      "probable_cause": "Worn CAN pins on slot connector",
+      "linked_sop": "SOP-BAT-002"
+    },
+    {
+      "issue_code": "E-405",
+      "issue": "Earth leakage / RCCB trip",
+      "frequency": "Occasional",
+      "probable_cause": "Insulation breakdown in slot harness",
+      "linked_sop": "SOP-GEN-001"
+    }
+  ],
+  "incident_history": [
+    {
+      "ticket_id": "INC-2026-05561",
+      "date_reported": "2026-05-12",
+      "issue_code": "E-603",
+      "symptoms": "Batteries inserted in slot 3 show 'Battery not detected'; same batteries work in other slots",
+      "root_cause": "CAN-H and CAN-L pins on slot 3 connector worn and partially recessed",
+      "resolution": "Replaced slot 3 connector assembly (part CONN-SLT-48V-G2), verified CAN handshake with 3 batteries",
+      "resolved_by": "Karthik Gowda",
+      "time_to_resolve_hours": 2.5,
+      "linked_sop": "SOP-BAT-002"
+    },
+    {
+      "ticket_id": "INC-2026-11087",
+      "date_reported": "2026-11-09",
+      "issue_code": "E-405",
+      "symptoms": "RCCB tripped repeatedly, entire station down",
+      "root_cause": "Chafed insulation on slot 6 DC harness touching cabinet frame",
+      "resolution": "Ongoing - slot 6 harness isolated, station restored with slot 6 disabled. Replacement harness ordered (ETA 2026-11-20). PM performed during visit",
+      "resolved_by": "Karthik Gowda",
+      "time_to_resolve_hours": null,
+      "status": "Open",
+      "linked_sop": "SOP-GEN-001"
+    }
+  ]
+}

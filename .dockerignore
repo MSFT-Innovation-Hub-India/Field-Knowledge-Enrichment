@@ -1,0 +1,16 @@
+.venv
+.git
+.env
+.pytest_cache
+**/__pycache__
+**/node_modules
+src/ui/dist
+ui-dist
+runtime
+tests
+docs
+infra
+scripts
+tools
+.playwright-mcp
+*.png

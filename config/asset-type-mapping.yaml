@@ -1,0 +1,13 @@
+# Which asset types each SOP applies to. Used for chunk tagging (applies_to) and the issue-type catalog.
+# Defaults come from the SOP ID family (BAT / STN / GEN); overrides are per SOP ID.
+defaults:
+  BAT: [battery]
+  STN: [station]
+  GEN: [station]
+
+overrides:
+  SOP-BAT-001: [battery, station]   # includes station cooling issue (W-310)
+  SOP-BAT-002: [battery, station]   # includes slot connector fault
+
+# Optional per-section overrides: { SOP-ID: { s04: [station] } }
+sections: {}

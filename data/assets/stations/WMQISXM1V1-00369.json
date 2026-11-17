@@ -1,0 +1,91 @@
+{
+  "asset_id": "WMQISXM1V1-00369",
+  "asset_type": "station",
+  "station_name": "Andheri East MIDC Swap Hub",
+  "location": { "city": "Mumbai", "area": "Andheri East (MIDC)", "state": "Maharashtra", "latitude": 19.1176, "longitude": 72.8697 },
+  "site_type": "Fleet depot (3W cargo fleet partner)",
+  "install_date": "2021-01-08",
+  "hardware_model": "SwapStation-X1 Gen1",
+  "slot_count": 12,
+  "charger_modules": 12,
+  "charger_rating_kw": 1.2,
+  "power_supply": "3-phase 415V, 20 kVA sanctioned load",
+  "firmware_version": "STN-FW 3.9.12",
+  "connectivity": { "primary": "4G LTE (Vi SIM)", "backup": "Ethernet (depot LAN)", "modem_model": "Quectel EC21" },
+  "operational_status": "Active - Degraded (2 slots disabled)",
+  "avg_daily_swaps": 188,
+  "uptime_last_30_days_pct": 92.4,
+  "last_preventive_maintenance": "2026-08-20",
+  "next_preventive_maintenance": "2026-11-20",
+  "field_engineer": "Imran Shaikh",
+  "assigned_batteries": ["INSMOMAH1209C176F813"],
+  "known_issues": [
+    {
+      "issue_code": "E-207",
+      "issue": "Charger cooling fan failure",
+      "frequency": "Recurring (Gen1 fan model)",
+      "probable_cause": "Gen1 fans have sleeve bearings that wear out in humid coastal conditions",
+      "linked_sop": "SOP-STN-002"
+    },
+    {
+      "issue_code": "E-501",
+      "issue": "Water ingress in cabinet during monsoon",
+      "frequency": "Seasonal (June-September)",
+      "probable_cause": "Degraded door gasket and cable gland seals",
+      "linked_sop": "SOP-GEN-001"
+    },
+    {
+      "issue_code": "E-120",
+      "issue": "Rider authentication failure (QR/RFID)",
+      "frequency": "Occasional",
+      "probable_cause": "RFID reader cable loose; QR camera lens fogging",
+      "linked_sop": "SOP-STN-001"
+    }
+  ],
+  "incident_history": [
+    {
+      "ticket_id": "INC-2026-02215",
+      "date_reported": "2026-02-11",
+      "issue_code": "E-207",
+      "symptoms": "Slots 3 and 4 derating, fan fault alarm on charger modules CM-03 and CM-04",
+      "root_cause": "Fan bearing seizure",
+      "resolution": "Replaced both fans with Gen2 ball-bearing fans (part FAN-80-BB). Recommended fleet-wide fan upgrade for Gen1 stations",
+      "resolved_by": "Imran Shaikh",
+      "time_to_resolve_hours": 2.0,
+      "linked_sop": "SOP-STN-002"
+    },
+    {
+      "ticket_id": "INC-2026-07023",
+      "date_reported": "2026-07-04",
+      "issue_code": "E-501",
+      "symptoms": "Moisture sensor alarm, RCCB tripped, water droplets found near busbar",
+      "root_cause": "Door gasket cracked; rain water entered during heavy downpour",
+      "resolution": "Station isolated, cabinet dried with heat blower, insulation resistance tested (>50 MΩ), gasket replaced, silica gel packs added, station restored",
+      "resolved_by": "Imran Shaikh",
+      "time_to_resolve_hours": 8.5,
+      "linked_sop": "SOP-GEN-001"
+    },
+    {
+      "ticket_id": "INC-2026-08310",
+      "date_reported": "2026-08-17",
+      "issue_code": "E-120",
+      "symptoms": "Multiple riders reported 'Authentication failed' on QR scan",
+      "root_cause": "QR camera lens fogged due to humidity",
+      "resolution": "Cleaned lens, applied anti-fog coating, enabled RFID fallback for fleet riders",
+      "resolved_by": "Imran Shaikh",
+      "time_to_resolve_hours": 1.0,
+      "linked_sop": "SOP-STN-001"
+    },
+    {
+      "ticket_id": "INC-2026-10402",
+      "date_reported": "2026-10-28",
+      "issue_code": "E-604",
+      "symptoms": "Battery INSMOMAH1209C176F813 triggered over-temperature alarm in slot 9 during charging",
+      "root_cause": "Battery internal fault (cell 11 abnormal temperature rise) - not a station fault",
+      "resolution": "Charging stopped automatically, slot 9 locked, battery moved to quarantine bin, slot 9 inspected and cleared. Battery sent for RMA",
+      "resolved_by": "Imran Shaikh",
+      "time_to_resolve_hours": 3.0,
+      "linked_sop": "SOP-BAT-001"
+    }
+  ]
+}

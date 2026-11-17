@@ -1,0 +1,70 @@
+{
+  "asset_id": "INSMOMAH8210F2625D13",
+  "asset_type": "battery",
+  "battery_model": "SB-48V-LFP-G2",
+  "chemistry": "LFP (Lithium Iron Phosphate)",
+  "nominal_voltage_v": 51.2,
+  "rated_capacity_ah": 40,
+  "energy_kwh": 2.05,
+  "cell_configuration": "16S1P prismatic",
+  "bms_firmware": "BMS-FW 2.8.3",
+  "manufacture_date": "2023-10-08",
+  "commissioned_date": "2023-11-20",
+  "cycle_count": 905,
+  "state_of_health_pct": 88,
+  "last_known_soc_pct": 41,
+  "warranty_expiry": "2028-11-19",
+  "vehicle_category": "E-2W (delivery scooter)",
+  "current_location": "In vehicle (last swap at WMQISXM1V1-01044)",
+  "operational_status": "In Service - Healthy",
+  "last_inspection_date": "2026-11-10",
+  "known_issues": [
+    {
+      "issue_code": "E-603",
+      "issue": "Battery not detected / BMS communication timeout in station slot",
+      "frequency": "Occasional",
+      "probable_cause": "Station-side connector wear; battery-side connector minor oxidation",
+      "linked_sop": "SOP-BAT-002"
+    },
+    {
+      "issue_code": "E-620",
+      "issue": "Physical damage - casing scratch / handle crack",
+      "frequency": "Once",
+      "probable_cause": "Battery dropped by rider during swap",
+      "linked_sop": "SOP-BAT-002"
+    }
+  ],
+  "incident_history": [
+    {
+      "ticket_id": "INC-2026-05560",
+      "date_reported": "2026-05-12",
+      "station_id": "WMQISXM1V1-01044",
+      "issue_code": "E-603",
+      "symptoms": "Battery not detected in slot 3 at station 01044; rider could not complete swap",
+      "root_cause": "Station slot 3 connector worn (station ticket INC-2026-05561). Battery connector had light oxidation",
+      "resolution": "Battery connector cleaned with contact cleaner and inspected (no pin damage). Battery inserted in slot 5 and detected successfully",
+      "resolved_by": "Karthik Gowda",
+      "time_to_resolve_hours": 0.5,
+      "linked_sop": "SOP-BAT-002"
+    },
+    {
+      "ticket_id": "INC-2026-08877",
+      "date_reported": "2026-08-30",
+      "station_id": "WMQISXM1V1-01044",
+      "issue_code": "E-620",
+      "symptoms": "Rider reported cracked handle after dropping battery",
+      "root_cause": "Mechanical impact from approximately 1 m drop",
+      "resolution": "Battery quarantined for 24 h observation (no temperature rise, no voltage drop, no swelling). Handle replaced, IP67 seal check passed, returned to service",
+      "resolved_by": "Battery Service Centre - Bengaluru",
+      "time_to_resolve_hours": 26.0,
+      "linked_sop": "SOP-BAT-002"
+    }
+  ],
+  "swap_history_last_5": [
+    { "date": "2026-11-17", "station_id": "WMQISXM1V1-01044", "soc_in_pct": 21, "soc_out_pct": 97 },
+    { "date": "2026-11-16", "station_id": "WMQISXM1V1-01044", "soc_in_pct": 17, "soc_out_pct": 98 },
+    { "date": "2026-11-15", "station_id": "WMQISXM1V1-01044", "soc_in_pct": 23, "soc_out_pct": 97 },
+    { "date": "2026-11-14", "station_id": "WMQISXM1V1-01044", "soc_in_pct": 19, "soc_out_pct": 98 },
+    { "date": "2026-11-13", "station_id": "WMQISXM1V1-01044", "soc_in_pct": 16, "soc_out_pct": 97 }
+  ]
+}

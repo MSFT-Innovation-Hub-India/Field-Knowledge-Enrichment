@@ -1,0 +1,78 @@
+{
+  "asset_id": "INSMOMAH1209C176F813",
+  "asset_type": "battery",
+  "battery_model": "SB-48V-NMC-G1",
+  "chemistry": "NMC (Nickel Manganese Cobalt)",
+  "nominal_voltage_v": 48.1,
+  "rated_capacity_ah": 42,
+  "energy_kwh": 2.02,
+  "cell_configuration": "13S14P cylindrical (21700)",
+  "bms_firmware": "BMS-FW 2.6.9",
+  "manufacture_date": "2021-09-12",
+  "commissioned_date": "2021-10-05",
+  "cycle_count": 1720,
+  "state_of_health_pct": 72,
+  "last_known_soc_pct": 33,
+  "warranty_expiry": "2026-10-04",
+  "vehicle_category": "E-3W (cargo loader)",
+  "current_location": "Quarantine bin - WMQISXM1V1-00369, pending RMA pickup",
+  "operational_status": "Quarantined - Do Not Use",
+  "last_inspection_date": "2026-10-28",
+  "known_issues": [
+    {
+      "issue_code": "E-604",
+      "issue": "Over-temperature alarm during charging (cell-level hotspot)",
+      "frequency": "Once (critical)",
+      "probable_cause": "Internal fault in cell group 11",
+      "linked_sop": "SOP-BAT-001"
+    },
+    {
+      "issue_code": "E-615",
+      "issue": "Deep discharge (pack voltage below 39 V)",
+      "frequency": "Twice",
+      "probable_cause": "Vehicle left parked for long duration with battery connected",
+      "linked_sop": "SOP-BAT-003"
+    },
+    {
+      "issue_code": "E-616",
+      "issue": "Low State of Health (below 75% threshold)",
+      "frequency": "Ongoing",
+      "probable_cause": "High cycle count, heavy cargo usage, deep discharge events",
+      "linked_sop": "SOP-BAT-003"
+    }
+  ],
+  "incident_history": [
+    {
+      "ticket_id": "INC-2026-01467",
+      "date_reported": "2026-01-19",
+      "station_id": "WMQISXM1V1-00369",
+      "issue_code": "E-615",
+      "symptoms": "Station rejected battery: pack voltage 37.8 V, BMS in sleep mode",
+      "root_cause": "Vehicle parked for 9 days with battery connected (fleet holiday)",
+      "resolution": "Battery recovered on service bench with low-current pre-charge (0.05C) to 42 V, then standard charge. Capacity test showed 78% SoH. Fleet partner advised to remove batteries during long parking",
+      "resolved_by": "Battery Service Centre - Mumbai",
+      "time_to_resolve_hours": 20.0,
+      "linked_sop": "SOP-BAT-003"
+    },
+    {
+      "ticket_id": "INC-2026-10401",
+      "date_reported": "2026-10-28",
+      "station_id": "WMQISXM1V1-00369",
+      "issue_code": "E-604",
+      "symptoms": "Cell group 11 temperature rose to 61°C while others at 38°C during charging in slot 9; station auto-stopped charging",
+      "root_cause": "Suspected internal short / high internal resistance in cell group 11",
+      "resolution": "Battery isolated per thermal safety SOP, moved to sand-filled quarantine bin, monitored 24 h (temperature normalised). Marked 'Do Not Use', RMA raised (RMA-2026-0388). Warranty expired - scrap/recycle evaluation pending",
+      "resolved_by": "Imran Shaikh",
+      "time_to_resolve_hours": 3.0,
+      "status": "Closed - RMA pending",
+      "linked_sop": "SOP-BAT-001"
+    }
+  ],
+  "swap_history_last_5": [
+    { "date": "2026-10-28", "station_id": "WMQISXM1V1-00369", "soc_in_pct": 14, "soc_out_pct": null },
+    { "date": "2026-10-27", "station_id": "WMQISXM1V1-00369", "soc_in_pct": 8, "soc_out_pct": 93 },
+    { "date": "2026-10-26", "station_id": "WMQISXM1V1-00369", "soc_in_pct": 11, "soc_out_pct": 92 },
+    { "date": "2026-10-25", "station_id": "WMQISXM1V1-00369", "soc_in_pct": 6, "soc_out_pct": 94 },
+    { "date": "2026-10-24", "station_id": "WMQISXM1V1-00369", "soc_in_pct": 9, "soc_out_pct": 93 }
+  ]
+}

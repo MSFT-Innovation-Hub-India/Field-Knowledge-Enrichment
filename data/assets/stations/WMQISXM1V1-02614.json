@@ -1,0 +1,80 @@
+{
+  "asset_id": "WMQISXM1V1-02614",
+  "asset_type": "station",
+  "station_name": "Wakad Bridge Swap Point",
+  "location": { "city": "Pune", "area": "Wakad", "state": "Maharashtra", "latitude": 18.5986, "longitude": 73.7650 },
+  "site_type": "Standalone kiosk (leased parking lot)",
+  "install_date": "2022-03-21",
+  "hardware_model": "SwapStation-X1 Gen2",
+  "slot_count": 8,
+  "charger_modules": 8,
+  "charger_rating_kw": 1.5,
+  "power_supply": "3-phase 415V, 15 kVA sanctioned load",
+  "firmware_version": "STN-FW 4.2.5",
+  "connectivity": { "primary": "4G LTE (Jio SIM)", "backup": "Wi-Fi (partner router)", "modem_model": "Quectel EC25" },
+  "operational_status": "Active",
+  "avg_daily_swaps": 96,
+  "uptime_last_30_days_pct": 95.1,
+  "last_preventive_maintenance": "2026-09-11",
+  "next_preventive_maintenance": "2026-12-11",
+  "field_engineer": "Sneha Kulkarni",
+  "assigned_batteries": ["INSMOMAH2109A271AD13"],
+  "known_issues": [
+    {
+      "issue_code": "E-305",
+      "issue": "Slot door lock not engaging / door stuck",
+      "frequency": "Recurring on slots 2 and 5",
+      "probable_cause": "Solenoid lock misalignment and dust in latch",
+      "linked_sop": "SOP-STN-003"
+    },
+    {
+      "issue_code": "E-402",
+      "issue": "Grid under-voltage / power fluctuation trip",
+      "frequency": "Frequent during evening peak (6-9 PM)",
+      "probable_cause": "Local transformer overloading; voltage dips below 360V",
+      "linked_sop": "SOP-GEN-001"
+    },
+    {
+      "issue_code": "E-110",
+      "issue": "OTA firmware update failed",
+      "frequency": "Once",
+      "probable_cause": "Connectivity drop during OTA download",
+      "linked_sop": "SOP-STN-001"
+    }
+  ],
+  "incident_history": [
+    {
+      "ticket_id": "INC-2026-03390",
+      "date_reported": "2026-03-09",
+      "issue_code": "E-305",
+      "symptoms": "Rider unable to close slot 5 door after inserting battery; swap could not complete",
+      "root_cause": "Latch bracket loosened, solenoid plunger not aligned with strike plate",
+      "resolution": "Realigned and tightened latch bracket, cleaned latch with contact cleaner, applied dry PTFE lubricant, tested 20 open/close cycles",
+      "resolved_by": "Sneha Kulkarni",
+      "time_to_resolve_hours": 1.5,
+      "linked_sop": "SOP-STN-003"
+    },
+    {
+      "ticket_id": "INC-2026-07712",
+      "date_reported": "2026-07-29",
+      "issue_code": "E-110",
+      "symptoms": "Station stuck in 'Updating' state, swaps blocked",
+      "root_cause": "OTA package partially downloaded (connectivity dropped at 63%)",
+      "resolution": "Triggered rollback to STN-FW 4.2.5 from NOC console, station back online. OTA rescheduled for off-peak window (2 AM) over Wi-Fi backup",
+      "resolved_by": "NOC Team",
+      "time_to_resolve_hours": 0.8,
+      "linked_sop": "SOP-STN-001"
+    },
+    {
+      "ticket_id": "INC-2026-10158",
+      "date_reported": "2026-10-14",
+      "issue_code": "E-402",
+      "symptoms": "Main contactor tripped 3 times in one evening, all slots stopped charging",
+      "root_cause": "Supply voltage dipping to 342V during evening peak",
+      "resolution": "Enabled under-voltage auto-recovery with 120s delay in station config; raised complaint with DISCOM (ref MSEDCL-PN-55821) for transformer upgrade; servo stabiliser proposal raised",
+      "resolved_by": "Sneha Kulkarni",
+      "time_to_resolve_hours": 4.0,
+      "linked_sop": "SOP-GEN-001"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "asset_id": "INSMOMAH0809A061E913",
+  "asset_type": "battery",
+  "battery_model": "SB-48V-LFP-G2",
+  "chemistry": "LFP (Lithium Iron Phosphate)",
+  "nominal_voltage_v": 51.2,
+  "rated_capacity_ah": 40,
+  "energy_kwh": 2.05,
+  "cell_configuration": "16S1P prismatic",
+  "bms_firmware": "BMS-FW 2.8.3",
+  "manufacture_date": "2022-08-09",
+  "commissioned_date": "2022-09-15",
+  "cycle_count": 612,
+  "state_of_health_pct": 94,
+  "last_known_soc_pct": 87,
+  "warranty_expiry": "2027-09-14",
+  "vehicle_category": "E-2W (delivery scooter)",
+  "current_location": "WMQISXM1V1-02616 (slot 4, charging)",
+  "operational_status": "In Service - Healthy",
+  "last_inspection_date": "2026-10-02",
+  "known_issues": [
+    {
+      "issue_code": "E-604",
+      "issue": "Over-temperature warning during charging",
+      "frequency": "Seasonal (summer)",
+      "probable_cause": "High station cabinet temperature, not a battery defect",
+      "linked_sop": "SOP-BAT-001"
+    }
+  ],
+  "incident_history": [
+    {
+      "ticket_id": "INC-2026-04121",
+      "date_reported": "2026-04-22",
+      "station_id": "WMQISXM1V1-02616",
+      "issue_code": "E-604",
+      "symptoms": "BMS reported max cell temperature 52°C while charging in slot 4; charging paused",
+      "root_cause": "Station cabinet overheating (linked to station ticket INC-2026-04117), battery cells normal",
+      "resolution": "Battery allowed to cool to 35°C, resumed charging after station filter/fan fix. Cell temperature spread verified < 3°C. No action on battery",
+      "resolved_by": "Rohit Deshmukh",
+      "time_to_resolve_hours": 1.0,
+      "linked_sop": "SOP-BAT-001"
+    }
+  ],
+  "swap_history_last_5": [
+    { "date": "2026-11-16", "station_id": "WMQISXM1V1-02616", "soc_in_pct": 18, "soc_out_pct": 98 },
+    { "date": "2026-11-15", "station_id": "WMQISXM1V1-02614", "soc_in_pct": 22, "soc_out_pct": 97 },
+    { "date": "2026-11-14", "station_id": "WMQISXM1V1-02616", "soc_in_pct": 15, "soc_out_pct": 99 },
+    { "date": "2026-11-13", "station_id": "WMQISXM1V1-02616", "soc_in_pct": 20, "soc_out_pct": 98 },
+    { "date": "2026-11-12", "station_id": "WMQISXM1V1-02614", "soc_in_pct": 25, "soc_out_pct": 98 }
+  ]
+}

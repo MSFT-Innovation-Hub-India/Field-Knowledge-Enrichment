@@ -1,0 +1,70 @@
+{
+  "asset_id": "INSMOMAH2109A271AD13",
+  "asset_type": "battery",
+  "battery_model": "SB-48V-NMC-G1",
+  "chemistry": "NMC (Nickel Manganese Cobalt)",
+  "nominal_voltage_v": 48.1,
+  "rated_capacity_ah": 42,
+  "energy_kwh": 2.02,
+  "cell_configuration": "13S14P cylindrical (21700)",
+  "bms_firmware": "BMS-FW 2.6.9",
+  "manufacture_date": "2021-09-21",
+  "commissioned_date": "2021-10-30",
+  "cycle_count": 1450,
+  "state_of_health_pct": 81,
+  "last_known_soc_pct": 64,
+  "warranty_expiry": "2026-10-29",
+  "vehicle_category": "E-3W (passenger auto)",
+  "current_location": "WMQISXM1V1-02614 (slot 6, charging)",
+  "operational_status": "In Service - Watchlist",
+  "last_inspection_date": "2026-10-20",
+  "known_issues": [
+    {
+      "issue_code": "E-610",
+      "issue": "Cell voltage imbalance (> 80 mV delta)",
+      "frequency": "Recurring after high-load usage",
+      "probable_cause": "Ageing cell group 9 with higher internal resistance",
+      "linked_sop": "SOP-BAT-003"
+    },
+    {
+      "issue_code": "E-612",
+      "issue": "Rapid SoC drop reported by rider",
+      "frequency": "Occasional",
+      "probable_cause": "SoC estimation drift due to imbalance; BMS SoC not recalibrated",
+      "linked_sop": "SOP-BAT-003"
+    }
+  ],
+  "incident_history": [
+    {
+      "ticket_id": "INC-2026-05902",
+      "date_reported": "2026-05-27",
+      "station_id": "WMQISXM1V1-02616",
+      "issue_code": "E-612",
+      "symptoms": "Rider complaint: SoC dropped from 45% to 8% within 3 km",
+      "root_cause": "BMS SoC drift; cell delta 112 mV at low SoC",
+      "resolution": "Battery pulled to service bench, full charge + 12 hour passive balancing, SoC recalibration via full discharge-charge cycle. Cell delta reduced to 28 mV",
+      "resolved_by": "Battery Service Centre - Pune",
+      "time_to_resolve_hours": 30.0,
+      "linked_sop": "SOP-BAT-003"
+    },
+    {
+      "ticket_id": "INC-2026-10233",
+      "date_reported": "2026-10-19",
+      "station_id": "WMQISXM1V1-02614",
+      "issue_code": "E-610",
+      "symptoms": "Station flagged cell imbalance warning at end of charge (delta 86 mV)",
+      "root_cause": "Cell group 9 internal resistance 18% above pack average",
+      "resolution": "Balancing repeated; BMS firmware update to 2.6.9 for improved balancing current. Battery placed on watchlist: replace if SoH < 75% or delta > 100 mV again",
+      "resolved_by": "Sneha Kulkarni",
+      "time_to_resolve_hours": 14.0,
+      "linked_sop": "SOP-BAT-003"
+    }
+  ],
+  "swap_history_last_5": [
+    { "date": "2026-11-16", "station_id": "WMQISXM1V1-02614", "soc_in_pct": 12, "soc_out_pct": 96 },
+    { "date": "2026-11-16", "station_id": "WMQISXM1V1-02616", "soc_in_pct": 9, "soc_out_pct": 95 },
+    { "date": "2026-11-15", "station_id": "WMQISXM1V1-02614", "soc_in_pct": 14, "soc_out_pct": 96 },
+    { "date": "2026-11-14", "station_id": "WMQISXM1V1-02614", "soc_in_pct": 11, "soc_out_pct": 94 },
+    { "date": "2026-11-13", "station_id": "WMQISXM1V1-02616", "soc_in_pct": 10, "soc_out_pct": 96 }
+  ]
+}
