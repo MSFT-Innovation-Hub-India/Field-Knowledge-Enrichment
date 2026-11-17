@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | Status | **Draft v2 — for review.** No application code has been built yet. |
-| Customer / domain | Sun Mobility — battery-swap network operations |
+| Fictional operator / domain | Contoso Mobility (fictional) — battery-swap network operations |
 | Companions | [02-solution-architecture.md](./02-solution-architecture.md), [03-technical-specification.md](./03-technical-specification.md) |
 
 ## 1. Purpose

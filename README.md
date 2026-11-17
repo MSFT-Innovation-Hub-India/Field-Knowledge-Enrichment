@@ -1,8 +1,17 @@
-# Field Knowledge Enrichment (POC)
+# Field Knowledge Enrichment for Battery-Swap Operations
 
-A web app where operations raise battery/station tickets, a Foundry agent recommends actions from an Azure AI Search knowledge index, and technicians' actual fixes are assessed and, when they add value, written to the index incrementally. A fix for an issue type with no SOP creates a new SOP in the index.
+A proof of concept (POC) for AI-assisted battery-swap network operations using Microsoft Foundry and Azure AI Search. Operations staff raise battery or station tickets, receive SOP-grounded recommendations, and capture technicians' fixes to incrementally enrich the knowledge index.
 
-**Deployed (dev):** https://ke-dev-app.whitemoss-1ee70859.southindia.azurecontainerapps.io (anonymous, managed identity, no keys)
+## Overview
+
+- **Advise:** Recommend actions, safety warnings, and relevant incident history from standard operating procedures (SOPs) and asset records.
+- **Learn:** Assess completed fixes for useful new knowledge, augment existing indexed SOPs, or draft an indexed SOP for a new issue type.
+- **Ground:** Use Azure AI Search retrieval with a Microsoft Foundry agent, distinguishing field-derived knowledge from original SOP content.
+- **Run:** React and TypeScript frontend, Python API, Azure Container Apps, and Bicep infrastructure with Microsoft Entra authentication for Azure services.
+
+The scenario uses **Contoso Mobility**, a fictional battery-swap operator. The name is illustrative and does not imply affiliation with a real organization.
+
+> **POC only:** Not production-ready or a substitute for approved operating and safety procedures. The demo UI/API allows anonymous access; Azure managed identities authenticate service-to-service calls, not end users. Review field-derived SOPs before operational use. See the [known limitations](docs/04-implementation-notes.md#known-limits-poc) before deployment. Do not upload confidential, personal, or production customer data.
 
 ## Documents
 | Doc | Purpose |
@@ -41,3 +50,11 @@ $env:PYTHONPATH="src"; .\.venv\Scripts\python -m uvicorn knowledge_enrichment.ap
 # then, once per environment: tools/bootstrap_index.py and tools/create_agent.py with that environment's .env
 ```
 A new environment = `infra/params/<env>.bicepparam` + `SEARCH_INDEX_NAME` / `ADVISOR_AGENT_NAME` for that environment.
+
+## Contributing
+
+Open an issue to discuss a change or submit a focused pull request with a clear description. Keep examples fictional and exclude credentials, personal information, and customer-identifying content. For code changes, run the relevant pytest tests and, for UI changes, `npm run build` in `src/ui`. Documentation-only changes do not require application tests.
+
+## License
+
+Licensed under the [MIT License](LICENSE).
