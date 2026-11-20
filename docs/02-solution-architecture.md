@@ -23,51 +23,106 @@ Indexers read from a data source (blob, ADLS, SQL, Cosmos …). Blob and Cosmos 
 ## 2. System context
 
 ```mermaid
-flowchart LR
-    subgraph Users
+%%{init: {"theme":"base","themeVariables":{"background":"#ffffff","primaryColor":"#ffffff","primaryTextColor":"#263445","primaryBorderColor":"#829bb3","lineColor":"#829bb3","secondaryColor":"#f8fafc","tertiaryColor":"#ffffff","clusterBkg":"#fafbfc","clusterBorder":"#cbd2d9","edgeLabelBackground":"#ffffff","fontFamily":"Segoe UI, Arial, sans-serif","fontSize":"14px"},"flowchart":{"curve":"linear","nodeSpacing":55,"rankSpacing":75,"padding":18,"htmlLabels":true}}}%%
+flowchart TD
+    subgraph CLIENTS["External clients"]
+        direction LR
         OPS["Operations person"]
         TECH["Field technician"]
     end
 
-    subgraph ACA["Azure Container App (env pcdotai-agent, South India)<br/>system-assigned managed identity"]
-        direction TB
-        UI["React UI<br/>(static files)"]
-        API["FastAPI backend"]
-        ENR["Enrichment engine<br/>classify - assess - merge / draft SOP - guardrails - index"]
-        DATA[/"/app/data (read-only)<br/>sops/*.md, assets/*.json<br/>= install directory corpus"/]
-        RT[/"/app/runtime (ephemeral)<br/>audit.jsonl"/]
-        UI --> API
-        API --> ENR
-        ENR --> DATA
-        API --> DATA
-        ENR --> RT
+    subgraph DEPLOYMENT["Application deployment · South India"]
+        subgraph ENV["Existing shared Container Apps environment · pcdotai-agent"]
+            subgraph APP["Solution-owned Container App · single replica · system-assigned managed identity"]
+                direction TB
+                UI["React UI<br/>Static files served by FastAPI"]
+                API["FastAPI backend<br/>Validation · recommendations · resolution jobs"]
+                ENR["Enrichment pipeline<br/>Classify · assess · merge or draft<br/>Guardrails · chunk · embed · index"]
+
+                subgraph FILES["Container-local files · not external storage"]
+                    direction LR
+                    CORPUS["Packaged corpus · /app/data<br/>SOPs and asset JSON · read-only"]
+                    CONFIG["Packaged configuration · /app/config<br/>Asset-type applicability mapping"]
+                    AUDIT["Ephemeral runtime · /app/runtime<br/>Audit log · not durable"]
+                end
+
+                UI -->|"HTTP /api · same origin"| API
+                API -->|"Accepted resolution · background job"| ENR
+                API ---|"Read packaged corpus"| CORPUS
+                ENR ---|"Read packaged corpus"| CORPUS
+                ENR ---|"Append audit records"| AUDIT
+                CONFIG -.->|"Applicability rules"| ENR
+            end
+        end
     end
 
-    ACR[("Azure Container Registry<br/>az acr build, AcrPull via MI")]
+    subgraph SHARED["Existing shared AI services · outside application deployment"]
+        direction LR
 
-    subgraph FOUNDRY["Microsoft Foundry: ai-foundry-common-ihub (Sweden Central)"]
-        AGENT["sop-advisor agent<br/>gpt-5.4 + AI Search tool<br/>(project managed identity)"]
-        LLM["gpt-5.4<br/>(classify / assess / merge / draft)"]
-        EMB["text-embedding-3-small"]
+        subgraph FOUNDRY["Microsoft Foundry · ai-foundry-common-ihub · Sweden Central"]
+            subgraph PROJECT["Existing Foundry project · project managed identity"]
+                subgraph AGENTOWN["Solution-owned agent and connection"]
+                    AGENT["sop-advisor agent<br/>Grounded recommendations<br/>Entra-authenticated AI Search tool"]
+                end
+            end
+
+            subgraph MODELS["Shared model deployments"]
+                direction LR
+                GPT["gpt-5.4<br/>Generation and structured assessment"]
+                EMB["text-embedding-3-small<br/>Document and query embeddings"]
+            end
+        end
+
+        subgraph SEARCH["Azure AI Search · ai-search-vector-001 · Switzerland North"]
+            subgraph INDEXOWN["Solution-owned logical index namespace"]
+                IDX["ke-&lt;env&gt;-knowledge · ONE index<br/>Hybrid search and semantic ranking<br/>SOPs · catalog · profiles · incidents · field experience<br/>Only durable enriched-knowledge store"]
+            end
+        end
     end
 
-    subgraph SEARCH["Azure AI Search: ai-search-vector-001 (Switzerland North)"]
-        IDX[("ke-env-knowledge<br/>ONE index: SOP sections, SOP catalog,<br/>incidents, field experience")]
+    subgraph SUPPORT["Supporting build and administration · outside application deployment"]
+        direction LR
+        DEV["Developer laptop · Entra sign-in<br/>Bicep deployment · bootstrap · agent setup"]
+        ACR["Existing Azure Container Registry<br/>pcdotaiagentd10b5a<br/>Cloud-built application image"]
     end
 
-    DEV["Developer laptop<br/>tools/ CLI (az login)"]
+    OPS -->|"HTTPS · anonymous ingress"| UI
+    TECH -->|"HTTPS · anonymous ingress"| UI
 
-    OPS --> UI
-    TECH --> UI
-    ACR -. image .-> ACA
-    API -- "recommendations (Container App MI)" --> AGENT
-    AGENT -- "knowledge tool (project MI)" --> IDX
-    IDX -. "vectorizer (Search MI)" .-> EMB
-    ENR -- "model calls (Container App MI)" --> LLM
-    ENR -- "embed new chunks (Container App MI)" --> EMB
-    ENR -- "upsert / delete chunks (Container App MI)" --> IDX
-    DEV -- "create index, load corpus" --> IDX
-    DEV -- "create agent + connection" --> FOUNDRY
+    API -->|"HTTPS · invoke agent · App MI"| AGENT
+    AGENT -->|"Model inference"| GPT
+    AGENT -->|"HTTPS · knowledge retrieval · Project MI"| IDX
+    ENR -->|"HTTPS · classify / assess / merge / draft · App MI"| GPT
+    ENR -->|"HTTPS · embed changed chunks · App MI"| EMB
+    ENR -->|"HTTPS · catalog lookup / upsert / delete · App MI"| IDX
+    IDX -->|"HTTPS · query vectorization · Search MI"| EMB
+
+    DEV -.->|"az acr build · package code, corpus and config"| ACR
+    DEV -.->|"Bicep · deployment, settings and RBAC"| APP
+    ACR -.->|"Image pull · AcrPull via App MI"| APP
+    DEV -.->|"Create agent and Entra Search connection"| AGENT
+    DEV -.->|"Create index schema"| IDX
+    DEV -->|"Bootstrap · embed seed chunks"| EMB
+    DEV -->|"Bootstrap · upload seed documents"| IDX
+
+    classDef component fill:#ffffff,stroke:#829bb3,stroke-width:1px,color:#263445;
+    class OPS,TECH,UI,API,ENR,CORPUS,CONFIG,AUDIT,AGENT,GPT,EMB,IDX,DEV,ACR component;
+
+    style CLIENTS fill:#ffffff,stroke:#cbd2d9,stroke-width:1px
+    style DEPLOYMENT fill:#fafbfc,stroke:#cbd2d9,stroke-width:1px
+    style ENV fill:#ffffff,stroke:#cbd2d9,stroke-width:1px,stroke-dasharray:5 4
+    style APP fill:#ffffff,stroke:#cbd2d9,stroke-width:1px
+    style FILES fill:#fafbfc,stroke:#cbd2d9,stroke-width:1px
+    style SHARED fill:#ffffff,stroke:#cbd2d9,stroke-width:1px,stroke-dasharray:5 4
+    style FOUNDRY fill:#fafbfc,stroke:#cbd2d9,stroke-width:1px,stroke-dasharray:5 4
+    style PROJECT fill:#ffffff,stroke:#cbd2d9,stroke-width:1px,stroke-dasharray:5 4
+    style AGENTOWN fill:#ffffff,stroke:#cbd2d9,stroke-width:1px
+    style MODELS fill:#ffffff,stroke:#cbd2d9,stroke-width:1px,stroke-dasharray:5 4
+    style SEARCH fill:#fafbfc,stroke:#cbd2d9,stroke-width:1px,stroke-dasharray:5 4
+    style INDEXOWN fill:#ffffff,stroke:#cbd2d9,stroke-width:1px
+    style SUPPORT fill:#ffffff,stroke:#cbd2d9,stroke-width:1px
+
+    linkStyle default stroke:#829bb3,stroke-width:1px;
 ```
 
 ### Components
